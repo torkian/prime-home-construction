@@ -2,7 +2,10 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #163B3D;
+  --primary-peach: #EDBAA6;
+  --primary-terracotta: #DB957B;
+  --primary-teal: #163B3D;
 }
 
 @theme inline {
@@ -10,17 +13,23 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Prime Home Construction Brand Colors */
+  --color-primary-peach: var(--primary-peach);
+  --color-primary-terracotta: var(--primary-terracotta);
+  --color-primary-teal: var(--primary-teal);
+  --color-primary: var(--primary-peach);
+  --color-secondary: var(--primary-teal);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
 }

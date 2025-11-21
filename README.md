@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Prime Home Construction Website
+
+A modern, mobile-first construction business website built with Next.js 14, TypeScript, and Tailwind CSS.
+
+## Features
+
+- **Stunning Hero Section**: Full-screen, attention-grabbing hero with animations
+- **Mobile-First Design**: Optimized for all devices with responsive layouts
+- **Project Gallery**: Filterable project showcase with modal previews
+- **Contact Form**: Validated quote request form with React Hook Form
+- **Testimonials Carousel**: Auto-rotating client testimonials
+- **Smooth Animations**: Framer Motion for professional interactions
+- **SEO Optimized**: Proper metadata and semantic HTML
+- **Fast Performance**: Optimized for Vercel deployment
+
+## Color Palette
+
+- Primary Peach: `#EDBAA6`
+- Terracotta: `#DB957B`
+- Dark Teal: `#163B3D`
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Installation
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+prime-home-construction/
+├── app/
+│   ├── layout.tsx          # Root layout with Header/Footer
+│   ├── page.tsx            # Home page
+│   ├── projects/           # Projects page
+│   └── contact/            # Contact page
+├── components/
+│   ├── Header.tsx          # Navigation with mobile menu
+│   ├── Hero.tsx            # Hero section
+│   ├── Services.tsx        # Services overview
+│   ├── ProjectGallery.tsx  # Filterable project grid
+│   ├── Testimonials.tsx    # Testimonial carousel
+│   ├── ContactForm.tsx     # Contact form with validation
+│   └── Footer.tsx          # Site footer
+└── public/
+    ├── logo/               # Brand logos
+    └── hero-construction.jpg  # Hero background image
+```
 
-## Learn More
+## Deployment to Vercel
 
-To learn more about Next.js, take a look at the following resources:
+### Option 1: Vercel CLI
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Install Vercel CLI
+npm i -g vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Login to Vercel
+vercel login
 
-## Deploy on Vercel
+# Deploy
+vercel
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Option 2: GitHub Integration
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Push your code to GitHub
+2. Go to [vercel.com](https://vercel.com)
+3. Click "Import Project"
+4. Select your repository
+5. Click "Deploy"
+
+Your site will be live in minutes!
+
+## Customization
+
+### Adding Your Own Images
+
+Replace the placeholder hero image:
+- Add your hero image to `/public/hero-construction.jpg`
+- Add project images to `/public/projects/`
+
+### Updating Content
+
+- **Company Info**: Edit contact details in `components/Footer.tsx`
+- **Services**: Modify services array in `components/Services.tsx`
+- **Projects**: Update projects array in `components/ProjectGallery.tsx`
+- **Testimonials**: Edit testimonials array in `components/Testimonials.tsx`
+
+### Brand Colors
+
+Colors are defined in `app/globals.css`
+
+## Mobile Optimization
+
+- Touch-friendly buttons (44px minimum)
+- Responsive breakpoints: 320px, 768px, 1024px
+- Swipeable carousels on mobile
+- Hamburger menu for mobile navigation
+- Fast loading (<3s on mobile networks)
+
+## License
+
+© 2025 Prime Home Construction. All rights reserved.
