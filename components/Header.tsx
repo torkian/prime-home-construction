@@ -21,7 +21,21 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // On interior pages, always show solid header style
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+    }
+  }, [isMobileMenuOpen]);
+
+  // Simple: header is solid on interior pages or when scrolled
+  // Menu state doesn't affect header appearance
   const shouldUseSolidStyle = !isHomePage || isScrolled;
 
   const navLinks = [
@@ -32,11 +46,12 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed left-0 right-0 top-0 transition-all duration-300 ${
         shouldUseSolidStyle
           ? 'bg-white/95 py-3 shadow-lg backdrop-blur-sm'
           : 'bg-transparent py-4'
       }`}
+      style={{ zIndex: 50 }}
     >
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
@@ -76,7 +91,8 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="relative z-50 flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden"
+            className="relative flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden"
+            style={{ zIndex: 50 }}
             aria-label="Toggle menu"
           >
             <motion.span
@@ -86,13 +102,13 @@ export default function Header() {
                   : { rotate: 0, y: 0 }
               }
               className={`block h-0.5 w-6 transition-colors ${
-                isMobileMenuOpen || !shouldUseSolidStyle ? 'bg-white' : 'bg-secondary'
+                isMobileMenuOpen ? 'bg-white' : shouldUseSolidStyle ? 'bg-secondary' : 'bg-white'
               }`}
             />
             <motion.span
               animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
               className={`block h-0.5 w-6 transition-colors ${
-                isMobileMenuOpen || !shouldUseSolidStyle ? 'bg-white' : 'bg-secondary'
+                isMobileMenuOpen ? 'bg-white' : shouldUseSolidStyle ? 'bg-secondary' : 'bg-white'
               }`}
             />
             <motion.span
@@ -102,30 +118,75 @@ export default function Header() {
                   : { rotate: 0, y: 0 }
               }
               className={`block h-0.5 w-6 transition-colors ${
-                isMobileMenuOpen || !shouldUseSolidStyle ? 'bg-white' : 'bg-secondary'
+                isMobileMenuOpen ? 'bg-white' : shouldUseSolidStyle ? 'bg-secondary' : 'bg-white'
               }`}
             />
           </button>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Completely Independent Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-secondary md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-secondary md:hidden"
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              width: '100vw',
+              height: '100vh',
+              zIndex: 9999,
+              pointerEvents: 'auto'
+            }}
           >
-            <div className="flex h-full flex-col items-center justify-center gap-8 px-4">
+            {/* Close Button - Fixed Position */}
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed right-4 top-4 flex h-12 w-12 items-center justify-center rounded-lg border-2 border-white/20 bg-white/10 text-white backdrop-blur-sm transition-all hover:bg-white/20"
+              style={{ zIndex: 10000 }}
+              aria-label="Close menu"
+            >
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+
+            {/* Logo - Fixed Position */}
+            <div className="fixed left-4 top-4">
+              <Image
+                src="/logo/PHCLogo_WhiteVersion (1).png"
+                alt="Prime Home Construction"
+                width={160}
+                height={50}
+                className="h-auto w-36"
+              />
+            </div>
+
+            {/* Menu Content - Centered */}
+            <div className="flex h-full w-full flex-col items-center justify-center gap-8 px-4">
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.href}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: index * 0.1 + 0.1 }}
                 >
                   <Link
                     href={link.href}
@@ -139,12 +200,12 @@ export default function Header() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: navLinks.length * 0.1 }}
+                transition={{ delay: navLinks.length * 0.1 + 0.1 }}
               >
                 <Link
                   href="/contact"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="inline-block rounded-lg bg-primary-peach px-8 py-4 text-xl font-bold text-secondary transition-all hover:scale-105 hover:bg-primary-terracotta"
+                  className="inline-block rounded-xl bg-gradient-to-r from-primary-peach to-primary-terracotta px-8 py-4 text-xl font-bold text-white shadow-strong transition-all hover:scale-105 hover:shadow-glow"
                 >
                   Get Quote
                 </Link>
