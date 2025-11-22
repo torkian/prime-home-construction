@@ -138,8 +138,19 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-12 border-t border-white/10 pt-8 text-center text-gray-400">
-          <p>
+          <p className="mb-2">
             &copy; {currentYear} Prime Home Construction. All rights reserved.
+          </p>
+          <p className="text-sm">
+            Powered by{' '}
+            <a
+              href="https://nuromind.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary-peach transition-colors hover:text-primary-terracotta hover:underline"
+            >
+              nuromind.io
+            </a>
           </p>
         </div>
       </div>

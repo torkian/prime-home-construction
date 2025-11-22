@@ -206,7 +206,7 @@ export default function ContactForm() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full min-h-[56px] rounded-lg bg-primary-peach px-8 py-4 text-lg font-semibold text-secondary transition-all hover:scale-105 hover:bg-primary-terracotta disabled:opacity-50 disabled:hover:scale-100 active:scale-95"
+              className="w-full min-h-[56px] rounded-xl bg-gradient-to-r from-primary-peach to-primary-terracotta px-8 py-4 text-lg font-semibold text-white shadow-medium transition-all hover:scale-105 hover:shadow-glow disabled:opacity-50 disabled:hover:scale-100 active:scale-95"
             >
               {isSubmitting ? 'Sending...' : 'Get Free Quote'}
             </button>

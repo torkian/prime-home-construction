@@ -69,8 +69,20 @@ export default function ProjectGallery() {
       : projects.filter((project) => project.category === selectedCategory);
 
   return (
-    <section className="bg-gray-50 py-16 sm:py-20 lg:py-24">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative overflow-hidden bg-gradient-to-b from-gray-50 to-white py-16 sm:py-20 lg:py-24">
+      {/* Liquid Blobs */}
+      <div className="absolute inset-0">
+        <div
+          className="liquid-blob absolute right-[5%] top-[10%] h-[500px] w-[500px] bg-gradient-to-br from-primary-peach/20 to-primary-terracotta/15"
+          style={{ animationDelay: '-3s' }}
+        />
+        <div
+          className="liquid-blob absolute left-[8%] bottom-[15%] h-[450px] w-[450px] bg-gradient-to-br from-primary-terracotta/15 to-primary-peach/20"
+          style={{ animationDelay: '-6s' }}
+        />
+      </div>
+
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -117,21 +129,30 @@ export default function ProjectGallery() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.3 }}
+                whileHover={{ y: -8, scale: 1.02 }}
                 onClick={() => setSelectedProject(project)}
-                className="group cursor-pointer overflow-hidden rounded-xl bg-white shadow-md transition-shadow hover:shadow-xl"
+                className="group cursor-pointer overflow-hidden rounded-2xl bg-white shadow-soft transition-all hover:shadow-glow"
               >
                 <div className="relative aspect-[4/3] overflow-hidden">
-                  <div className="h-full w-full bg-gradient-to-br from-primary-terracotta to-primary-peach" />
+                  <div className="h-full w-full bg-gradient-to-br from-primary-terracotta to-primary-peach transition-transform group-hover:scale-110" />
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-white">Project Image</span>
+                    <span className="text-white text-lg font-medium">Project Image</span>
                   </div>
-                  <div className="absolute inset-0 bg-secondary/0 transition-all group-hover:bg-secondary/20" />
+                  {/* Gradient Overlay on Hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-secondary/60 via-secondary/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+
+                  {/* View Project Button */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
+                    <div className="glass rounded-full px-6 py-3 text-sm font-semibold text-secondary shadow-strong">
+                      View Project
+                    </div>
+                  </div>
                 </div>
                 <div className="p-4 sm:p-5">
-                  <span className="inline-block rounded-full bg-primary-peach/20 px-3 py-1 text-xs font-medium text-secondary">
+                  <span className="inline-block rounded-full bg-gradient-to-r from-primary-peach/20 to-primary-terracotta/20 px-3 py-1 text-xs font-medium text-secondary">
                     {project.category}
                   </span>
-                  <h3 className="mt-3 text-xl font-bold text-secondary">
+                  <h3 className="mt-3 text-xl font-bold text-secondary transition-colors group-hover:text-primary-terracotta">
                     {project.title}
                   </h3>
                   <p className="mt-2 text-gray-600">{project.description}</p>

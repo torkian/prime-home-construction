@@ -63,8 +63,21 @@ export default function Stats() {
   ];
 
   return (
-    <section className="bg-gradient-to-b from-white to-gray-50 py-16 sm:py-20 lg:py-24">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative overflow-hidden bg-white py-16 sm:py-20 lg:py-24">
+      {/* Liquid Blob Background */}
+      <div className="absolute inset-0 -z-0">
+        <div className="liquid-blob absolute left-[10%] top-[20%] h-[400px] w-[400px] bg-gradient-to-br from-primary-peach/30 to-primary-terracotta/20" />
+        <div
+          className="liquid-blob absolute right-[15%] bottom-[10%] h-[350px] w-[350px] bg-gradient-to-br from-primary-terracotta/25 to-primary-peach/30"
+          style={{ animationDelay: '-4s' }}
+        />
+        <div
+          className="liquid-blob absolute left-[50%] top-[50%] h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-br from-primary-peach/20 to-transparent"
+          style={{ animationDelay: '-2s' }}
+        />
+      </div>
+
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

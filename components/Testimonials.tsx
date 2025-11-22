@@ -121,9 +121,13 @@ export default function Testimonials() {
                 }}
                 className="absolute w-full"
               >
-                <div className="rounded-2xl bg-white p-8 shadow-xl sm:p-10">
-                  {/* Star Rating */}
-                  <div className="mb-6 flex justify-center gap-1">
+                <div className="relative overflow-hidden rounded-2xl bg-white p-8 shadow-strong sm:p-10">
+                  {/* Gradient Accent */}
+                  <div className="absolute right-0 top-0 h-40 w-40 translate-x-12 -translate-y-12 rounded-full bg-gradient-to-br from-primary-peach/10 to-transparent blur-3xl" />
+
+                  <div className="relative z-10">
+                    {/* Star Rating */}
+                    <div className="mb-6 flex justify-center gap-1">
                     {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
                       <svg
                         key={i}
@@ -150,6 +154,7 @@ export default function Testimonials() {
                     <p className="text-gray-600">
                       {testimonials[currentIndex].role}
                     </p>
+                  </div>
                   </div>
                 </div>
               </motion.div>

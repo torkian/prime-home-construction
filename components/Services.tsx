@@ -91,8 +91,11 @@ const services = [
 
 export default function Services() {
   return (
-    <section className="bg-white py-16 sm:py-20 lg:py-24">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
+      {/* Mesh Gradient Background */}
+      <div className="mesh-gradient-peach absolute inset-0" />
+
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -117,15 +120,21 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="group rounded-xl bg-gray-50 p-6 transition-all hover:bg-white hover:shadow-xl sm:p-8"
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="group relative overflow-hidden rounded-2xl bg-white p-6 shadow-soft transition-all hover:shadow-glow sm:p-8"
             >
-              <div className="mb-4 inline-flex rounded-lg bg-primary-peach/20 p-3 text-secondary transition-colors group-hover:bg-primary-peach group-hover:text-white">
-                {service.icon}
+              {/* Gradient Accent */}
+              <div className="absolute right-0 top-0 h-32 w-32 translate-x-8 -translate-y-8 rounded-full bg-gradient-to-br from-primary-peach/20 to-primary-terracotta/10 blur-2xl transition-transform group-hover:scale-150" />
+
+              <div className="relative z-10">
+                <div className="mb-4 inline-flex rounded-xl bg-gradient-to-br from-primary-peach to-primary-terracotta p-3 text-white shadow-medium transition-all group-hover:shadow-strong group-hover:scale-110">
+                  {service.icon}
+                </div>
+                <h3 className="mb-3 text-xl font-bold text-secondary">
+                  {service.title}
+                </h3>
+                <p className="text-gray-600">{service.description}</p>
               </div>
-              <h3 className="mb-3 text-xl font-bold text-secondary">
-                {service.title}
-              </h3>
-              <p className="text-gray-600">{service.description}</p>
             </motion.div>
           ))}
         </div>
